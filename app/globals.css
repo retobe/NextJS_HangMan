@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --shadow-size: 10px;
+}
+
+body {
+  padding: 1rem;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.text-shadow-a {
+  text-shadow: 0 0 var(--shadow-size) rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow {
+  text-shadow: 0 0 var(--shadow-size) black;
+}
+
+kbd {
+  transition: all 0.3s;
+  cursor: pointer;
+  box-shadow: 0 0 10px black;
+}
+
+kbd:not(.clicked):hover {
+  transform: scale(1.15);
+}
+
+.clicked {
+  opacity: .5;
+  transform: none;
+  cursor: default !important;
+  background-color: #000 !important;
+}

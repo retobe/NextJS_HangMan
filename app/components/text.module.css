@@ -1,0 +1,17 @@
+.un {
+  display: inline-block;
+  font-size: 2rem;
+}
+
+.un::after {
+  content: "";
+  width: 0px;
+  height: 1px;
+  display: block;
+  background: rgb(255, 255, 255);
+  transition: 300ms;
+}
+
+.un:hover::after {
+  width: 100%;
+}
