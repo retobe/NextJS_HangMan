@@ -2,13 +2,35 @@
 import React, { ChangeEvent, useState } from "react";
 
 const Settings = () => {
-  const [wordDifficulty, setWordDifficulty] = useState(3);
+  const [wordDifficulty, setWordDifficulty] = useState(
+    parseInt(sessionStorage.getItem("wordCount") || "3")
+  );
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const displayLetters = (event: ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value, 10);
     setWordDifficulty(value);
+    sessionStorage.setItem("wordCount", `${value}`);
     document.querySelector("output")!.innerHTML = `${value} Letters`;
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const setCustomWord = () => {
+    const customWordDiv = document.querySelector(
+      "#customWord"
+    ) as HTMLInputElement | null;
+
+    if (customWordDiv) {
+      sessionStorage.setItem("customWord", `${customWordDiv.value}`);
+    } else {
+      window.location.reload();
+    }
+  };
+
   return (
     <div
       id="settings"
@@ -33,13 +55,37 @@ const Settings = () => {
             className="w-[120px] h-[30px]"
           />
         </div>
-        <output>3 letters</output>
+        <output>{sessionStorage.getItem("wordCount") || "3"} Letters</output>
       </div>
-      {/* <div className="custom_word" id="custom_word_div">
+      <div
+        className="custom_word container flex flex-col mx-auto items-center justify-center"
+        id="custom_word_div"
+      >
         <h3>
           Custom Word (Make sure it's empty or else it'll use custom word)
         </h3>
-      </div> */}
+        <input
+          type={showPassword ? "text" : "password"}
+          onChange={setCustomWord}
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs mt-3"
+          name="customWord"
+          id="customWord"
+        />
+        <div
+          onClick={togglePasswordVisibility}
+          className="flex items-center justify-center gap-1 cursor-pointer text-white mt-3"
+        >
+          <i
+            className={`fa ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+            id="passwordIcon"
+            aria-hidden="true"
+          ></i>
+          <label className="label cursor-pointer" htmlFor="customWord">
+            Show Password
+          </label>
+        </div>
+      </div>
     </div>
   );
 };

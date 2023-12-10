@@ -3,6 +3,7 @@
 import KeyboardBtn from "./components/KeyboardBtn";
 import StartBtn from "./components/StartBtn";
 import Settings from "./components/Settings";
+import HiddenWord from "./components/HiddenWord";
 
 export default async function Home() {
   return (
@@ -50,13 +51,14 @@ export default async function Home() {
         </div>
         {/* END of Directions Div Element */}
 
-        <h1 id="result" className="mt-3 mb-3 text-5xl">
-          _ _ _ _ _ _
-        </h1>
+        <HiddenWord />
         <h1 className="word" id="word"></h1>
         <h5 className="guesses" id="guesses"></h5>
 
-        <div className="mt-3 flex flex-col gap-y-3.5 bg-orange-400 p-4 rounded-xl items-center">
+        <div
+          id="keyboardDiv"
+          className="mt-3 flex-col gap-y-3.5 bg-orange-400 p-4 rounded-xl items-center hidden"
+        >
           <div className="top-key flex gap-3 text-[28px]">
             <KeyboardBtn text="Q" />
             <KeyboardBtn text="W" />
